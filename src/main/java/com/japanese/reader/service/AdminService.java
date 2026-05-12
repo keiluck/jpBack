@@ -5,7 +5,7 @@ import com.japanese.reader.model.Question;
 import java.util.List;
 
 public interface AdminService {
-    // 题库
+    // 题库1
     List<Question> getAllQuestions();
     Question createQuestion(Question question);
     Question updateQuestion(Long id, Question question);
