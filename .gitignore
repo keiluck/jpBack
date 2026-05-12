@@ -1,0 +1,9 @@
+target/
+*.class
+*.jar
+*.war
+.idea/
+*.iml
+uploads/
+src/main/resources/application.yml
+.DS_Store
