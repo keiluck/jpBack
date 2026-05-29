@@ -1,7 +1,8 @@
 package com.japanese.reader.mapper;
 
-import com.japanese.reader.model.Article;
 import org.springframework.stereotype.Component;
+
+import com.japanese.reader.dto.Article;
 
 import java.util.List;
 import java.util.stream.Collectors;

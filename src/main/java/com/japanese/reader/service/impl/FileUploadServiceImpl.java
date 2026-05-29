@@ -2,8 +2,8 @@ package com.japanese.reader.service.impl;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.japanese.reader.dto.Question;
 import com.japanese.reader.exception.BusinessException;
-import com.japanese.reader.model.Question;
 import com.japanese.reader.repository.QuestionRepository;
 import com.japanese.reader.service.FileUploadService;
 import lombok.RequiredArgsConstructor;

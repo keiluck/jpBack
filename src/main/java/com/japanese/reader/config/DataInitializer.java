@@ -1,7 +1,7 @@
 package com.japanese.reader.config;
 
-import com.japanese.reader.model.Article;
-import com.japanese.reader.model.Sentence;
+import com.japanese.reader.dto.Article;
+import com.japanese.reader.dto.Sentence;
 import com.japanese.reader.repository.ArticleRepository;
 import jakarta.annotation.PostConstruct;
 import org.springframework.context.annotation.Configuration;

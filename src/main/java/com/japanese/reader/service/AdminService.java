@@ -1,8 +1,9 @@
 package com.japanese.reader.service;
 
-import com.japanese.reader.model.Article;
-import com.japanese.reader.model.Question;
 import java.util.List;
+
+import com.japanese.reader.dto.Article;
+import com.japanese.reader.dto.Question;
 
 public interface AdminService {
     // 题库1

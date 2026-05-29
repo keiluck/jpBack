@@ -1,4 +1,4 @@
-package com.japanese.reader.model;
+package com.japanese.reader.dto;
 
 import jakarta.persistence.*;
 import lombok.*;

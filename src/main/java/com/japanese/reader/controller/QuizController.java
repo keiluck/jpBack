@@ -1,7 +1,7 @@
 package com.japanese.reader.controller;
 
 import com.japanese.reader.common.ApiResponse;
-import com.japanese.reader.model.Question;
+import com.japanese.reader.dto.Question;
 import com.japanese.reader.service.QuizService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

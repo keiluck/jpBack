@@ -1,7 +1,8 @@
 package com.japanese.reader.service;
 
-import com.japanese.reader.model.Question;
 import java.util.List;
+
+import com.japanese.reader.dto.Question;
 
 public interface QuizService {
     List<String> getCategories();

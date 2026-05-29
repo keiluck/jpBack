@@ -1,8 +1,8 @@
 package com.japanese.reader.service;
 
-import com.japanese.reader.model.Article;
-
 import java.util.List;
+
+import com.japanese.reader.dto.Article;
 
 /**
  * 文章业务接口

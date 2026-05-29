@@ -1,9 +1,9 @@
 package com.japanese.reader.service.impl;
 
+import com.japanese.reader.dto.Article;
+import com.japanese.reader.dto.RubyWord;
+import com.japanese.reader.dto.Sentence;
 import com.japanese.reader.exception.BusinessException;
-import com.japanese.reader.model.Article;
-import com.japanese.reader.model.RubyWord;
-import com.japanese.reader.model.Sentence;
 import com.japanese.reader.repository.ArticleRepository;
 import com.japanese.reader.service.ArticleService;
 import org.springframework.stereotype.Service;
