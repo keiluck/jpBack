@@ -1,5 +1,6 @@
 package com.japanese.reader.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.List;
@@ -23,5 +24,6 @@ public class Sentence {
 
     @ManyToOne
     @JoinColumn(name = "article_id")
+    @JsonIgnore
     private Article article;
 }

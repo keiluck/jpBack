@@ -18,6 +18,6 @@ public class Article {
     private String createdAt;
     private String updatedAt;
 
-    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private List<Sentence> sentences;
 }

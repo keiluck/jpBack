@@ -22,7 +22,7 @@ public class DataInitializer {
                     .id("1")
                     .title("日本の四季")
                     .content("日本は四季が美しい国です。春には桜が咲き、夏は緑に包まれ、秋は紅葉が美しく、冬は白い雪が降ります。")
-                    .audioUrl("https://example.com/audio/japanese-lesson-1.mp3")
+                    .audioUrl("/audio/001.mp3")
                     .createdAt("2024-01-01T00:00:00Z")
                     .updatedAt("2024-01-01T00:00:00Z")
                     .build();

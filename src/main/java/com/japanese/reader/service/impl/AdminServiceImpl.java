@@ -2,6 +2,7 @@ package com.japanese.reader.service.impl;
 
 import com.japanese.reader.dto.Article;
 import com.japanese.reader.dto.Question;
+import com.japanese.reader.dto.Sentence;
 import com.japanese.reader.exception.BusinessException;
 import com.japanese.reader.repository.ArticleRepository;
 import com.japanese.reader.repository.QuestionRepository;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -84,8 +86,12 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public Article createArticle(Article article) {
+        if (article.getId() == null || article.getId().isBlank()) {
+            article.setId(UUID.randomUUID().toString());
+        }
         article.setCreatedAt(now());
         article.setUpdatedAt(now());
+        linkSentences(article);
         return articleRepository.save(article);
     }
 
@@ -96,7 +102,21 @@ public class AdminServiceImpl implements AdminService {
         article.setId(existing.getId());
         article.setCreatedAt(existing.getCreatedAt());
         article.setUpdatedAt(now());
+        linkSentences(article);
         return articleRepository.save(article);
+    }
+
+    private void linkSentences(Article article) {
+        if (article.getSentences() == null) {
+            return;
+        }
+        int i = 0;
+        for (Sentence sentence : article.getSentences()) {
+            if (sentence.getId() == null || sentence.getId().isBlank()) {
+                sentence.setId(article.getId() + "-" + (i++));
+            }
+            sentence.setArticle(article);
+        }
     }
 
     @Override
