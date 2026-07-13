@@ -26,6 +26,12 @@
     </properties>
 
     <dependencies>
+        <!-- 日语形态素分析（自动生成假名注音） -->
+        <dependency>
+            <groupId>com.atilika.kuromoji</groupId>
+            <artifactId>kuromoji-ipadic</artifactId>
+            <version>0.9.0</version>
+        </dependency>
         <!-- Spring Boot Starters -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

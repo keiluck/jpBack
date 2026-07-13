@@ -13,7 +13,9 @@ import java.util.List;
 public class Sentence {
     @Id
     private String id;
+    @Column(columnDefinition = "TEXT")
     private String text;
+    @Column(columnDefinition = "TEXT")
     private String translation;
     private double startTime;
     private double endTime;

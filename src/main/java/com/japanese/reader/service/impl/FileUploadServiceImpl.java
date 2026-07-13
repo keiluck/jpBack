@@ -26,22 +26,27 @@ public class FileUploadServiceImpl implements FileUploadService {
     private final QuestionRepository questionRepository;
     private final ObjectMapper objectMapper;
 
-    @Value("${upload.audio.path:uploads/audio}")
+    @Value("${file.upload.path:uploads/audio}")
     private String audioUploadPath;
+
+    private static final List<String> ALLOWED_AUDIO_EXTENSIONS =
+            List.of(".mp3", ".m4a", ".wav", ".aac", ".ogg");
 
     @Override
     public String uploadAudio(MultipartFile file) {
         if (file.isEmpty()) throw new BusinessException("文件不能为空");
         String originalName = file.getOriginalFilename();
-        if (originalName == null || !originalName.toLowerCase().endsWith(".mp3")) {
-            throw new BusinessException("只支持 mp3 格式音频");
+        if (originalName == null || ALLOWED_AUDIO_EXTENSIONS.stream()
+                .noneMatch(ext -> originalName.toLowerCase().endsWith(ext))) {
+            throw new BusinessException("只支持 mp3 / m4a / wav / aac / ogg 格式音频");
         }
         try {
             Path dir = Paths.get(audioUploadPath);
             Files.createDirectories(dir);
-            String fileName = UUID.randomUUID() + "_" + originalName;
+            String fileName = UUID.randomUUID().toString().substring(0, 8) + "_" + originalName;
             Path filePath = dir.resolve(fileName);
-            file.transferTo(new File(filePath.toString()));
+            // transferTo 对相对路径会基于临时目录解析，必须转绝对路径
+            file.transferTo(filePath.toAbsolutePath().toFile());
             return "/audio/" + fileName;
         } catch (IOException e) {
             throw new BusinessException("音频上传失败：" + e.getMessage());
