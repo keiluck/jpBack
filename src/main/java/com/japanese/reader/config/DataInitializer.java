@@ -1,22 +1,36 @@
 package com.japanese.reader.config;
 
+import com.japanese.reader.dto.AdminUser;
 import com.japanese.reader.dto.Article;
 import com.japanese.reader.dto.Sentence;
+import com.japanese.reader.repository.AdminUserRepository;
 import com.japanese.reader.repository.ArticleRepository;
 import jakarta.annotation.PostConstruct;
+import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 
 @Configuration
 public class DataInitializer {
     private final ArticleRepository articleRepository;
+    private final AdminUserRepository adminUserRepository;
 
-    public DataInitializer(ArticleRepository articleRepository) {
+    @Value("${admin.init-username:admin}")
+    private String initUsername;
+
+    @Value("${admin.init-password:admin123}")
+    private String initPassword;
+
+    public DataInitializer(ArticleRepository articleRepository, AdminUserRepository adminUserRepository) {
         this.articleRepository = articleRepository;
+        this.adminUserRepository = adminUserRepository;
     }
 
     @PostConstruct
     public void init() {
+        initAdminUser();
         if (articleRepository.count() == 0) {
             Article article = Article.builder()
                     .id("1")
@@ -45,6 +59,17 @@ public class DataInitializer {
 
             article.setSentences(Arrays.asList(s1, s2, s3, s4, s5));
             articleRepository.save(article);
+        }
+    }
+
+    /** 首次启动时创建默认 admin 账号，密码 BCrypt 加密存储 */
+    private void initAdminUser() {
+        if (adminUserRepository.count() == 0) {
+            adminUserRepository.save(AdminUser.builder()
+                    .username(initUsername)
+                    .passwordHash(BCrypt.hashpw(initPassword, BCrypt.gensalt()))
+                    .createdAt(LocalDateTime.now().toString() + "Z")
+                    .build());
         }
     }
 }
